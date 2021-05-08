@@ -1,5 +1,5 @@
 {
-  "name": "node",
+  "name": "demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "art-template": "^4.13.2",
-    "express": "^4.17.1",
-    "express-art-template": "^1.0.1"
+    "koa": "^2.13.1",
+    "koa-art-template": "^1.1.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "koa-session": "^6.2.0",
+    "koa-static": "^5.0.0"
   }
 }
