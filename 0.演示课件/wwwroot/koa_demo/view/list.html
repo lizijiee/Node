@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>聊天列表</title>
+</head>
+<body>
+    <h1>您好：{{userName}}</h1>
+
+
+    <div id="newmsg">
+        <ul>
+            {{each msgs as msg}}
+            <li>{{msg.username}}:{{msg.content}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{userName}}：<input type="text" name="newmsg" placeholder="请输入内容" id="newcontent"/><input type="submit" value="发送" id="btn" />
+
+
+    <script>
+        document.getElementById('btn').onclick = function () {
+            //获取用户发送的内容
+
+            var message = document.getElementById('newcontent').value;
+
+            //console.log(message)
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('post', '/dosend');
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.send('msg=' + message);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        //console.log(111)
+                        console.log(xhr.responseText);
+
+                        var arr = JSON.parse(xhr.responseText);
+
+                        console.log(arr);
+
+                        var html = '';
+
+                        html += '<ul>';
+
+                        for (var i = 0; i <= arr.length - 1; i++) {
+                            html += '<li>' + arr[i].username + ':' + arr[i].content + '</li>';
+
+                        }
+                        html += '</ul>';
+
+                        document.getElementById('newmsg').innerHTML = html;
+
+                      
+
+                    }
+                }
+            }
+        }
+
+
+    </script>
+
+
+</body>
+</html>
