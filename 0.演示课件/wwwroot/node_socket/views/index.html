@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>聊天列表</title>
+    <link rel="stylesheet" type="text/css" href="css/qq.css" />
+</head>
+<body>
+    <div class="qqBox">
+        <div class="BoxHead">
+
+            <div class="headImg">
+                <img src="img/6.jpg" style="margin-top:4px;" />
+            </div>
+
+            <div class="internetName">{{username}}<span style="padding-left:30px;">当前在线人数：<em id="usernum">11</em></span></div>
+
+        </div>
+        <div class="context">
+            <div class="conLeft">
+                <select id="toname" onchange="siliao = this.value"> 
+                </select>
+
+                <div class="all">
+                    <input type="text" placeholder="@对所有人" id="all_msg" /><input type="submit" value="@所有人" style="background:#0094ff;color:#fff" id="btn_all" />
+                </div>
+
+                <div>
+                    <button id="a_group">A群</button>
+                    <button id="b_group">B群</button>
+                </div>
+                <div class="all">
+                    <input type="text" placeholder="群聊" id="qunliaomsg" /><input type="submit" value="群聊" style="background:#0094ff;color:#fff" id="qun_btn"/>
+                </div>
+            </div>
+            <div class="conRight">
+                <div class="Righthead">
+                    <div class="headName"><!--向<span style="padding-left:15px;padding-right :15px;">ss</span>发送--> </div>
+                    <div class="headConfig">
+                        <ul>
+                            <li><img src="img/20170926103645_06.jpg" /></li>
+                            <li><img src="img/20170926103645_08.jpg" /></li>
+                            <li><img src="img/20170926103645_10.jpg" /></li>
+                            <li><img src="img/20170926103645_12.jpg" /></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="RightCont">
+                    <ul class="newsList" style="padding-top:20px;" id="ul_list">
+                        
+                    </ul>
+                </div>
+                <div class="RightFoot">
+                    <div class="footTop">
+                        <ul>
+                            <li><img src="img/20170926103645_31.jpg" /></li>
+                            <li class="ExP"><img src="img/20170926103645_33.jpg" /></li>
+                            <li><img src="img/20170926103645_35.jpg" /></li>
+                            <li><img src="img/20170926103645_37.jpg" /></li>
+                            <li><img src="img/20170926103645_39.jpg" /></li>
+                            <li><img src="img/20170926103645_41.jpg" alt="" /></li>
+                            <li><img src="img/20170926103645_43.jpg" /></li>
+                            <li><img src="img/20170926103645_45.jpg" /></li>
+                        </ul>
+                    </div>
+                    <div class="inputBox">
+                        <textarea style="width: 99%;height: 75px; border: none;outline: none;" name="" rows="" cols="" id="siliaoMsg"></textarea>
+                        <button class="sendBtn" id="btn_siliao">私聊</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('http://localhost:8080');
+        socket.on('connect', function () {
+            var siliao;
+            var group;           
+
+            console.log('已连接socket.io')
+
+            socket.emit('login', {
+                id: {{id}}
+            })
+
+        });
+
+        socket.on('test', function (data) {
+            console.log(data)
+        });
+
+        socket.on('newmsg', function (data) {
+
+            var ul = document.getElementById('ul_list');
+
+            ul.innerHTML+= `<li>${data}</li>`;
+
+        })
+
+        socket.on('online', function (data) {
+            //console.log(data);
+            var userNum = Object.values(data.online);
+            //console.log(userNum);
+
+            document.getElementById('usernum').innerText = userNum.length;
+
+            var select = document.getElementById('toname');
+
+            var html;
+
+            for (var i = 0; i <= userNum.length - 1; i++) {
+                var user = userNum[i];
+                html += `<option value="${user.socketid}">${user.username}</option>`
+            }
+            select.innerHTML = html;
+        })
+
+        socket.on('disconnect', function () {
+            console.log('socket.io 断开')
+        });
+
+        document.getElementById('btn_all').onclick = function () {
+
+            //获取用户发送的信息
+            var allmsg = document.getElementById('all_msg').value;
+
+            //console.log(allmsg)
+
+            //将消息发送到服务器端
+
+            socket.emit('sendMsg', {
+                allmsg: allmsg   
+            })
+        }
+
+        //私聊
+
+        document.getElementById('btn_siliao').onclick = function () {
+
+            var siliaoMsg = document.getElementById('siliaoMsg').value;
+
+            //console.log(siliaoMsg);
+
+            socket.emit('msgLs',{
+                siliaoMsg: siliaoMsg,
+                tosocketid: siliao
+            })
+        }
+
+        //群聊
+        document.getElementById('a_group').onclick = function () {
+            socket.emit('joinGroup', 'a_group');
+            group ='a_group'
+        }
+
+        document.getElementById('b_group').onclick = function () {
+            socket.emit('joinGroup', 'b_group');
+            group = 'b_group'
+        }
+
+        document.getElementById('qun_btn').onclick = function () {
+            var groupMsg = document.getElementById('qunliaomsg').value;
+            //console.log(groupMsg);
+            socket.emit('sendGroup', {
+                groupMsg: groupMsg,
+                groupid: group, 
+            })
+        }
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加页面</title>
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="css/global.css" media="all">
+		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+		<link rel="stylesheet" href="css/table.css" />
+	</head>
+
+	<body>
+		<div class="admin-main">
+
+			<blockquote class="layui-elem-quote">
+				<a href="/" class="layui-btn layui-btn-small">
+					 返回首页
+				</a>
+				
+			</blockquote>
+			<fieldset class="layui-elem-field">
+                <legend>添加信息</legend>
+				<div class="layui-field-box">
+					<table class="site-table table-hover">
+						<thead>
+							<tr>
+								
+								<th>姓名</th>
+								<th>性别</th>
+								<th>年龄</th>
+								<th>邮箱</th>
+								<th>电话</th>								
+								<th>操作</th>
+							</tr>
+						</thead>
+                        <tbody>
+                            <form action="/doadd" method="post">
+                                <tr>
+
+                                    <td><input type="text" name="name" placeholder="请输入姓名" /></td>
+                                    <td><input type="text" name="sex" placeholder="请输入性别" /></td>
+                                    <td><input type="text" name="age" placeholder="请输入年龄" /></td>
+                                    <td><input type="text" name="email" placeholder="请输入邮箱" /></td>
+                                    <td><input type="text" name="tel" placeholder="请输入电话" /></td>
+                                    <td>                                       
+                                        <input type="submit" value="添加" class="layui-btn layui-btn-mini"/>
+
+                                    </td>
+                                </tr>
+                            </form>
+
+                        </tbody>
+					</table>
+
+				</div>
+			</fieldset>	
+		</div>
+	
+	</body>
+
+</html>

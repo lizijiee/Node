@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+</head>
+
+<body>
+    <h1>模板引擎学习</h1>
+    <table>
+        <tr>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>年龄</td>
+            <td>添加时间</td>
+        </tr>
+        {{each stu as item}}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.sex}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.time}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+R  读取
+
+E  执行
+
+P  打印
+
+L  循环
+
+
+javascript 的组成
+
+ECMAScript   BOM    DOM
+
+
+node.js 模块
+
+内置模块   
+
+自定义模块  
+
+第三方模块  
+
+
+---
+
+
+npm  
+
+//安装模块
+
+npm install 模块名  
+
+--save  //安装到生产环境（默认就是生产环境）
+
+--save-dev  // 安装到开发环境（只能在本地运行）
+
+-g  //安装到全局中
+
+//卸载模块
+
+npm  uninstall  模块名
+
+npm init  //初始化一个项目
+
+
+nrm 
+
+//安装 nrm
+
+npm install nrm -g  //安装到全局目录
+
+nrm ls  //查看所有服务器
+
+nrm use taobao  //通过use 切换服务器
+
+nrm test  //测速
+
+时间模块网址：momentjs.cn
+
+---
+
+自定义模块需要遵守一个规范  commonJs
+
+
+---express
+
+第一步：初始化项目 npm  init
+
+第二部：安装 express  npm install express
+
+
+
+---模版引擎
+
+art-template
+
+npm install art-template
+
+npm install express-art-template
+
+
+
+---koa中 第三方中间件
+
+npm install koa-router
+
+
+--- koa-art-template 模版引擎
+
+npm i art-template
+
+npm install koa-art-template
+
+
+---bodyparser
+
+npm install koa-bodyparser  
+
+
+---静态资源
+
+npm install koa-static
+
+---koa-session
+
+npm install koa-session
+
+
+
+---socket.io
+
+客户端  socket.io-client    
+
+npm install socket.io-client
+
+
+
+服务器端  koa-socket   
+
+npm install koa-socket
+
+
+---mysql
+
+116.255.186.69
+
+studata
+
+admin123
+
+
+表格中属性的常用类型
+
+1、整数类型  int    bigint
+
+2、小数类型  float  double
+
+3、字符类型  char   varchar
+
+4、日期类型  datetime
+
+
+字段约束
+
+非空约束     NOT NULL  
+
+唯一性约束   UNIQUE
+
+默认约束     DEFAULT 18
+
+设置主键     PRIMARY KEY
+
+主键自增     AUTO_INCREMENT
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+

@@ -4,10 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>聊天列表页面</title>
+    <title>Document</title>
 </head>
+
 <body>
-    聊天列表页面
-    <div>你好,尊敬的用户：  {{userName}}</div>
+    <h1>
+        你好，欢迎尊敬的用户: {{username}}
+    </h1>
+    聊天列表:
+    <div id="newlist">
+        <ul>
+            {{each msgs as item }}
+            <li>
+                {{item.username}} {{item.content}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{username}} : <input type="text" name='newmsg' placeholder="请输入内容" id="newcontent" />
+    <input type="submit" value="发送" id="btn" />
+
+    <script>
+        document.getElementById('btn').onclick = function () {
+            // 获取用户发送的内容
+            var message = document.getElementById('newcontent').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/dosend');
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+            xhr.send('msg=' + message);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        var arr = JSON.parse(xhr.responseText); // 返回格式是字符串,页面数据内容没法刷新。
+                        var html = '<ul>';
+                        for (var i = 0; i < arr.length; i++) {
+                            console.log(arr[i].username, arr[i].content)
+                            html += `<li>${arr[i].username} ${arr[i].content}</li>`
+                        }
+                        html += `</ul>`;
+                        document.getElementById('newlist').innerHTML = html
+                    }
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>

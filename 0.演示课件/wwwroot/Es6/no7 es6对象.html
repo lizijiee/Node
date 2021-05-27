@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>对象</title>
+</head>
+<body>
+
+
+    <script>
+
+        //let name = '小明';
+        //let age = 20;
+
+        //let obj = {
+        //    name: name,
+        //    age: age,
+        //    f1: function () {
+        //        return this.name
+
+        //    }
+        //}
+
+        //console.log(obj.name + obj.age)
+        //console.log(obj.f1())
+
+
+        let name = '小1明';
+        let age = 20;
+
+        let obj = {
+            name,
+            age,
+            f1() {
+                return this.name
+            }
+        }
+
+        console.log(obj.name + obj.age)
+        console.log(obj.f1())
+
+
+
+
+
+    </script>
+
+</body>
+</html>
